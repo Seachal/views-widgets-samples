@@ -19,6 +19,7 @@ package androidx.viewpager2.integration.testapp
 import android.os.Bundle
 import androidx.viewpager2.integration.testapp.cards.CardViewAdapter
 import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 
 /**
  * Shows how to use [ViewPager2.setAdapter] with Views.
@@ -29,5 +30,25 @@ open class CardViewActivity : BaseCardActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewPager.adapter = CardViewAdapter()
+        viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                println("viewPager onPageScrolled at position $position  onPageScrolled $positionOffset    $positionOffsetPixels")
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                println("viewPager onPageSelected at $position")
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                println("viewPager onPageScrollStateChanged at $state")
+            }
+        })
     }
 }

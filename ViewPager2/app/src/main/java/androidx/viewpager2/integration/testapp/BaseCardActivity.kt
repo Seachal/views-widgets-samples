@@ -40,6 +40,7 @@ abstract class BaseCardActivity : FragmentActivity() {
     private lateinit var rotateCheckBox: CheckBox
     private lateinit var translateCheckBox: CheckBox
     private lateinit var scaleCheckBox: CheckBox
+//    延迟初始化
     private lateinit var gotoPage: Button
 
     private val translateX get() = viewPager.orientation == ORIENTATION_VERTICAL &&
@@ -78,6 +79,7 @@ abstract class BaseCardActivity : FragmentActivity() {
         scaleCheckBox = findViewById(R.id.scale_checkbox)
         gotoPage = findViewById(R.id.jump_button)
 
+//        控制用户是否可以输入， 关闭后，用户就划不动了。
         UserInputController(viewPager, findViewById(R.id.disable_user_input_checkbox)).setUp()
         OrientationController(viewPager, findViewById(R.id.orientation_spinner)).setUp()
         cardSelector.adapter = createCardAdapter()
